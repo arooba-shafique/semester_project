@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Product Form{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>{% if product %}Update Product{% else %}Add New Product{% endif %}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-store"></i></span>
+                    </div>
+                   <select id="store" name="store" class="form-control" aria-label="Store" required>
+    <option value="">Select Store</option>
+    {% for store in stores %}
+        <option value="{{ store.id }}" {% if product and product.store.id == store.id %}selected{% endif %}>{{ store.name }}</option>
+    {% endfor %}
+</select>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                    </div>
+                    <input type="text" id="name" name="name" placeholder="Product Name" class="form-control" aria-label="Product Name" value="{% if product %}{{ product.name }}{% endif %}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
+                    </div>
+                    <textarea id="description" name="description" placeholder="Product Description" class="form-control" rows="4" aria-label="Product Description">{% if product %}{{ product.description }}{% endif %}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                    </div>
+                    <input type="number" id="price" name="price" placeholder="Price" class="form-control" step="0.01" aria-label="Price" value="{% if product %}{{ product.price }}{% endif %}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image" aria-label="Product Image" accept="image/*">
+                        <label class="custom-file-label" for="image">{% if product and product.image %} {{ product.image.name }} {% else %} Choose file {% endif %}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check d-flex align-items-center">
+                    <input type="checkbox" id="is_published" name="is_published" class="form-check-input mr-2" aria-label="Is Published" {% if product and product.is_published %}checked{% endif %}>
+                    <label class="form-check-label text-white" for="is_published">Is published</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="login_btn">{% if product %}Update Product{% else %}Add Product{% endif %}</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="links">
+            <a href="{% url 'product_list' %}">Back to Product List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Add the following script to display the selected file name
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.getElementById('image');
+        const imageLabel = document.querySelector('.custom-file-label');
+
+        if (imageInput && imageLabel) {
+            imageInput.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    imageLabel.textContent = this.files[0].name;
+                } else {
+                    imageLabel.textContent = '{% if product and product.image %} {{ product.image.name }} {% else %} Choose file {% endif %}';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Store List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .store-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .store-card {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            width: 270px;
+            padding: 20px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+
+        .store-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border: 1px solid #444;
+        }
+
+        .store-name {
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .store-owner, .store-domain {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .store-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+            color: black;
+        }
+
+        .btn-edit:hover {
+            background-color: #007bff;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .no-stores {
+            text-align: center;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .create-store-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-create {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .btn-create:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Store List</h1>
+
+    {% if stores %}
+    <div class="store-container">
+        {% for store in stores %}
+            <div class="store-card">
+                {% if store.logo %}
+                    <img src="{{ store.logo.url }}" alt="{{ store.name }} Logo" class="store-logo" />
+                {% else %}
+                    <div class="store-logo d-flex align-items-center justify-content-center text-muted">
+                        No Logo
+                    </div>
+                {% endif %}
+
+                <div class="store-name">{{ store.name }}</div>
+                <div class="store-owner">Owner: {{ store.owner }}</div>
+                <div class="store-domain">Domain: {{ store.domain }}</div>
+
+                
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="no-stores">No stores available.</p>
+    {% endif %}
+
+    
+
+</body>
+</html>

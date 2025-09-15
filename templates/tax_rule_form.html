@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tax Rule Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{% if action == 'Create' %}Add New{% else %}Edit{% endif %} Tax Rule</h3>
+
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-store"></i></span>
+                    </div>
+                    {{ form.store }}
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                    </div>
+                    {{ form.country }}
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                    {{ form.state }}
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                    </div>
+                    {{ form.tax_rate }}
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check d-flex align-items-center">
+                        <input type="checkbox" id="is_active" name="is_active" class="form-check-input mr-2" aria-label="Is Active"
+                            {% if form.instance.pk %}
+                                {% if form.instance.is_active %}checked{% endif %}
+                            {% else %}
+                                checked
+                            {% endif %}
+                        >
+                        <label class="form-check-label text-white" for="is_active">Is active</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {% if action == 'Create' %}Save{% else %}Update{% endif %} Tax Rule
+                    </button>
+                </div>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'tax_rule_list' %}">Back to Tax Rules</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

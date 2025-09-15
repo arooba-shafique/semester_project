@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email Campaign List</title>
+  <style>
+    body {
+      background-color: #1c1c1c;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+      color: #f0f0f0;
+    }
+
+    tr:nth-child(even) {
+      background-color: #2a2a2a;
+    }
+
+    tr:hover {
+      background-color: #3a3a3a;
+    }
+
+    .actions a {
+      margin-right: 6px;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .add-btn-container {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .add-btn {
+      display: inline-block;
+      padding: 10px 16px;
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Email Campaign List</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Store Name</th>
+        <th>Subject</th>
+        <th>Content</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for campaign in campaigns %}
+        <tr>
+          <td>{{ campaign.store.name }}</td>
+          <td>{{ campaign.subject }}</td>
+          <td>{{ campaign.content|truncatechars:50 }}</td>
+          <td class="actions">
+            <a href="{% url 'email_campaign_update' campaign.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'email_campaign_delete' campaign.id %}" class="delete-btn"
+               onclick="return confirm('Are you sure you want to delete this campaign?');">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">No email campaigns found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="add-btn-container">
+    <a href="{% url 'email_campaign_form' %}" class="add-btn">+ Create New Campaign</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if action == 'Create' %}Add a Plan{% else %}Edit Plan{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card" style="background-color: rgba(0,0,0,0.5); color: white;">
+            <!-- Add/Edit Plan Heading -->
+            <div class="card-header text-center" style="background: none; border-bottom: none;">
+                <h4 class="text-white m-0">
+                    {% if action == 'Create' %}Add a Plan{% else %}Edit Plan{% endif %}
+                </h4>
+            </div>
+
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="text-light" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                        {% if field.name == 'name' %}
+                                            <i class="fas fa-signature"></i>
+                                        {% elif field.name == 'price' %}
+                                            <i class="fas fa-dollar-sign"></i>
+                                        {% elif field.name == 'features' %}
+                                            <i class="fas fa-list-ul"></i>
+                                        {% elif field.name == 'duration_days' %}
+                                            <i class="far fa-calendar-alt"></i>
+                                        {% else %}
+                                            <i class="fas fa-info-circle"></i>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                {{ field }}
+                            </div>
+                            {% if field.errors %}
+                                <div class="errorlist text-danger">{{ field.errors }}</div>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-warning btn-block">
+                        Submit Plan
+                    </button>
+
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'plan_list' %}" class="text-light">Back to Plan List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

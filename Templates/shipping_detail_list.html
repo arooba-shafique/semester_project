@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Shipping Detail{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Shipping Detail</h2>
+    <a href="{% url 'create_shipping_detail' %}" class="btn btn-success mb-3">Add Shipping Detail</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+      <tr>
+        <th>Order </th>
+        <th>Method</th>
+        <th>Tracking number</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for detail in details %}
+      <tr>
+        <td>{{ detail.order }}</td>
+        <td>{{ detail.method }}</td>
+        <td>{{ detail.tracking_number }}</td>
+         <td class="text-center">
+                    <a href="{% url 'update_shipping_detail' detail.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'delete_shipping_detail' detail.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+      
+      {% empty %}
+      <tr><td colspan="4">No shipping details found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

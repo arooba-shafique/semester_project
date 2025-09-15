@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Theme Details</title>
+</head>
+<body>
+    <h1>Store Theme Submitted</h1>
+
+    <p><strong>Store:</strong> {{ store_theme.store }}</p>
+    <p><strong>Theme Name:</strong> {{ store_theme.theme.name }}</p>
+    <p><strong>Active:</strong> {{ store_theme.active }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

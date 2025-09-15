@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Trial Submitted{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Trial Submitted</h1>
+        <p><strong>User:</strong>{{ trial.user }}</p>
+        <p><strong>Start Date:</strong> {{ trial.start_date }}</p>
+        <p><strong>End Date:</strong> {{ trial.end_date }}</p>
+        <p><strong>Active:</strong> 
+        {% if trial.active %}
+            <span class="badge badge-success">Active</span>
+        {% else %}
+            <span class="badge badge-secondary">Inactive</span>
+        {% endif %}
+    </p>
+
+
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+{% endblock %}

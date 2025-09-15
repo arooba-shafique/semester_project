@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Legal Document Details</title>
+</head>
+<body>
+    <h1>Legal Document Submitted</h1>
+
+    <p><strong>Store:</strong> {{ legal_document.store.name }}</p>
+    <p><strong>Doc Type:</strong> {{ legal_document.doc_type }}</p>
+    <p><strong>Content:</strong> {{ legal_document.content }}</p>
+    <p><strong>Version:</strong> {{ legal_document.version }}</p>
+    <p><strong>Effective Date:</strong> {{ legal_document.effective_date }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

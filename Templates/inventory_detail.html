@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Details</title>
+</head>
+<body>
+    <h1>Inventory Submitted</h1>
+
+    <p><strong>Product:</strong> {{ inventory.product.name }}</p>
+    <p><strong>Stock:</strong> {{ inventory.stock }}</p>
+    <p><strong>Restock date:</strong> {{ inventory.restock_date }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

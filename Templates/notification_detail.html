@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notification Details</title>
+</head>
+<body>
+    <h1>Notification Submitted</h1>
+
+    <p><strong>User:</strong> {{ notification.user.username }}</p>
+    <p><strong>Message:</strong> {{ notification.message }}</p>
+    <p><strong>Is Read:</strong> {{ notification.is_read }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

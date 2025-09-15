@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Plan</title>
+    <link rel="stylesheet" href="{% static 'css/plan.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Plan</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">{{ field.errors }}</div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

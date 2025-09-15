@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Details</title>
+</head>
+<body>
+    <h1>Theme Details</h1>
+
+    <p><strong>Name:</strong> {{ theme.name }}</p>
+    
+    <p><strong>File:</strong><br>
+        {% if theme.file %}
+            <a href="{{ theme.file.url }}" download>{{ theme.file.name }}</a>
+        {% else %}
+            No file uploaded.
+        {% endif %}
+    </p>
+  
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+    <p><a href="{% url 'create_theme' %}">Create Another Theme</a></p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Store Analytics{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Store Analytics</h2>
+    <a href="{% url 'create_store_analytics' %}" class="btn btn-success mb-3">Add Store Analytics</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Store</th>
+                <th>Date</th>
+                <th>Total sales</th>
+                <th>Total visitors</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stat in analytics %}
+            <tr>
+                <td>{{ stat.store }}</td>
+                <td>{{ stat.date }}</td>
+                <td>{{ stat.total_sales }}</td>
+                <td>{{ stat.total_visitors }}</td>
+                <td class="text-center">
+                    {% if stat.pk %}
+                        <a href="{% url 'update_store_analytics' stat.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'delete_store_analytics' stat.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    {% else %}
+                        <span class="text-muted">No Actions</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No analytics found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

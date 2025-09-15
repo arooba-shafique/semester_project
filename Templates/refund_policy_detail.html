@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Refund Policy Details</title>
+</head>
+<body>
+    <h1>Refund Policy Submitted</h1>
+
+    <p><strong>Store:</strong> {{ refund_policy.store.name }}</p>
+    <p><strong>Policy Text:</strong> {{ refund_policy.policy_text }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

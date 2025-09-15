@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Campaign Detail</title>
+</head>
+<body>
+    <h1>Email Campaign Submitted</h1>
+
+    <p><strong>Store:</strong> {{ email_campaign.store }}</p>
+    <p><strong>Subject:</strong> {{ email_campaign.subject }}</p>
+    <p><strong>Content:</strong></p>
+    <p>{{ email_campaign.content }}</p>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

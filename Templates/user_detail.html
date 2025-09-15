@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Submitted</h1>
+
+    <p><strong>Username:</strong> {{ user_obj.username }}</p>
+    <p><strong>Email:</strong> {{ user_obj.email }}</p>
+    <p><strong>Login method:</strong> {{ user_obj.login_method }}</p>
+    <p><strong>Passkey enabled:</strong> {{ user_obj.passkey_enabled }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

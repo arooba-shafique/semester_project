@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Promotion{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Promotion List</h2>
+  <a href="{% url 'create_promotion' %}" class="btn btn-success mb-3">Add Promotion</a>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Code</th>
+            <th>Discount percentage</th>
+            <th>Valid from</th>
+            <th>Valid to</th>
+           <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+      
+     {% for promo in promotion %}
+        <tr>
+            <td>{{ promo.code }}</td>
+            <td>{{ promo.discount_percentage }}</td>
+            <td>{{ promo.valid_from }}</td>
+            <td>{{ promo.valid_to }}</td>
+              <td class="text-center">
+          <a href="{% url 'update_promotion'  promo.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_promotion'  promo.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+
+
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No promotions found.</td></tr>
+        {% endfor %}
+   </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Detail</title>
+</head>
+<body>
+    <h1>Shipping Detail Submitted</h1>
+
+    <p><strong>Order:</strong> {{ shipping_detail.order.id }}</p>
+    <p><strong>Method:</strong> {{ shipping_detail.method }}</p>
+    <p><strong>Tracking number:</strong> {{ shipping_detail.tracking_number }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
+ 

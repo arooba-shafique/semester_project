@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Store{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Store</h2>
+  <a href="{% url 'create_store' %}" class="btn btn-success mb-3">Add Store</a>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Owner</th>
+        <th>Name</th>
+        <th>Logo</th>
+        <th>Domain</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for store in stores %}
+      <tr>
+        <td>{{ store.owner}}</td>
+        <td>{{ store.name }}</td>
+           <td>
+    {% if store.logo %}
+  <img src="{{ store.logo.url }}" width="100">
+{% else %}
+  <span>No logo uploaded</span>
+{% endif %}
+</td>
+
+         <td>{{ store.domain}}</td>
+         <td class="text-center">
+          <a href="{% url 'update_store' store.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_store' store.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No stores found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

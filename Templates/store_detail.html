@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Details</title>
+</head>
+<body>
+    <h1>Store Details</h1>
+
+    <p><strong>Owner:</strong> {{ store.owner }}</p>
+  
+    <p><strong>Name:</strong> {{ store.name }}</p>
+  
+    <p><strong>Domain:</strong> {{ store.domain }}</p>
+ 
+    <p><strong>Logo:</strong><br>
+        {% if store.logo %}
+            <img src="{{ store.logo.url }}" alt="Store Logo" height="100">
+        {% else %}
+            No logo uploaded.
+        {% endif %}
+    </p>
+    
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+    <p><a href="{% url 'create_store' %}">Create Another Store</a></p>
+</body>
+</html>

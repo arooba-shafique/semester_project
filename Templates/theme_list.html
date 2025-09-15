@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Theme{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Theme</h2>
+  <a href="{% url 'create_theme' %}" class="btn btn-success mb-3">Add Theme</a>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr><th>Name</th>
+        <th>File</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for theme in themes %}
+      <tr>
+        <td>{{ theme.name }}</td>
+   <td>
+                {% if theme.file %}
+                    <a href="{{ theme.file.url }}" target="_blank">View File</a>
+                {% else %}
+                    No File
+                {% endif %}
+            </td>
+            
+        <td class="text-center">
+          <a href="{% url 'update_theme' theme.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_theme' theme.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+        
+      </tr>
+      {% empty %}
+      <tr><td colspan="3">No themes found.</td>
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

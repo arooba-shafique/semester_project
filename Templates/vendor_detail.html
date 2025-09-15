@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Details</title>
+</head>
+<body>
+    <h1>Vendor Submitted</h1>
+
+    <p><strong>Name:</strong> {{ vendor.name }}</p>
+    <p><strong>Email:</strong> {{ vendor.email }}</p>
+    <p><strong>Phone:</strong> {{ vendor.phone }}</p>
+    <p><strong>Address:</strong> {{ vendor.address }}</p>
+    <p><strong>Store:</strong> {{ vendor.store.name }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

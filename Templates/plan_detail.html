@@ -1,0 +1,26 @@
+<!-- plan_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Plan Submitted Successfully</h2>
+    <div class="card p-4 shadow-sm">
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Name:</strong> {{ plan.name }}</li>
+        <li class="list-group-item"><strong>Price:</strong> ${{ plan.price }}</li>
+        <li class="list-group-item"><strong>Duration:</strong> {{ plan.duration_days }} days</li>
+        <li class="list-group-item"><strong>Features:</strong> {{ plan.features }}</li>
+      </ul>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'create_plan' %}" class="btn btn-success">Create Another Plan</a>
+    </div>
+  </div>
+</body>
+</html>

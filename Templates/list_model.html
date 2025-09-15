@@ -1,0 +1,26 @@
+<!-- list_plan.html (example) -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>All Plans</h2>
+  <a href="{% url 'create_plan' %}">+ Create Plan</a>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    {% for plan in plans %}
+    <tr>
+      <td>{{ plan.id }}</td>
+      <td>{{ plan.name }}</td>
+      <td>{{ plan.price }}</td>
+      <td>
+        <a href="{% url 'update_plan' plan.id %}">Edit</a>
+        <a href="{% url 'delete_plan' plan.id %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ action }} Inventory{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ action }} Inventory</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Product Dropdown -->
+                <div class="form-group">
+                    <label for="product" class="text-light font-weight-bold">Product</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-box-open"></i></span>
+                        </div>
+                        <select id="product" name="product" class="form-control" aria-label="Product" required>
+                            <option value="">Select Product</option>
+                            {% for product in products %}
+                                <option value="{{ product.id }}"
+                                    {% if form.data and form.data.product == product.id|stringformat:"s" %}
+                                        selected
+                                    {% elif inventory and inventory.product.id == product.id %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ product.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% if form.errors.product %}
+                        <div class="text-danger">{{ form.errors.product }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Stock -->
+                <div class="form-group">
+                    <label for="stock" class="text-light font-weight-bold">Stock Quantity</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                        </div>
+                        <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock Quantity" aria-label="Stock Quantity"
+                            value="{% if form.data %}{{ form.data.stock }}{% elif inventory %}{{ inventory.stock }}{% else %}{% endif %}" required>
+                    </div>
+                    {% if form.errors.stock %}
+                        <div class="text-danger">{{ form.errors.stock }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Restock Date -->
+                <div class="form-group">
+                    <label for="restock_date" class="text-light font-weight-bold">Restock Date</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="date" id="restock_date" name="restock_date" class="form-control" placeholder="Restock Date" aria-label="Restock Date"
+    value="{% if form.data %}{{ form.data.restock_date }}{% elif inventory and inventory.restock_date %}{{ inventory.restock_date|date:'Y-m-d' }}{% else %}{% endif %}">
+
+                    </div>
+                    {% if form.errors.restock_date %}
+                        <div class="text-danger">{{ form.errors.restock_date }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">{{ action }} Inventory</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'inventory_list' %}">Back to Inventory List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

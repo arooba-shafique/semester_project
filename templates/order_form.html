@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ action|default:"Place New" }} Order{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ action|default:"Place New" }} Order</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        <label class="text-light font-weight-bold" for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    {% if field.name == 'store' %}
+                                        <i class="fas fa-store"></i>
+                                    {% elif field.name == 'user' %}
+                                        <i class="fas fa-user"></i>
+                                    {% elif field.name == 'status' %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% elif field.name == 'total' %}
+                                        <i class="fas fa-dollar-sign"></i>
+                                    {% else %}
+                                        <i class="fas fa-pen"></i>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                            <div class="text-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {{ action|default:"Place" }} Order
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'order_list' %}">Back to Order List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

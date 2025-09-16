@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Process Payment{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header text-center" style="background: none; border-bottom: none;">
+                <h4 class="text-white m-0 font-weight-bold">Process Payment</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="text-light" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                        {% if field.name == 'user' %}
+                                            <i class="fas fa-user"></i>
+                                        {% elif field.name == 'amount' %}
+                                            <i class="fas fa-dollar-sign"></i>
+                                        {% elif field.name == 'method' %}
+                                            <i class="fas fa-credit-card"></i>
+                                        {% elif field.name == 'status' %}
+                                            <i class="fas fa-info-circle"></i>
+                                        {% elif field.name == 'transaction_id' %}
+                                            <i class="fas fa-receipt"></i>
+                                        {% else %}
+                                            <i class="fas fa-info-circle"></i>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                {{ field }}
+                            </div>
+                            {% if field.errors %}
+                                <div class="errorlist text-danger">{{ field.errors }}</div>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-warning btn-block">{{ action }}</button>
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'payment_list' %}" class="text-light">Back to Payment List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

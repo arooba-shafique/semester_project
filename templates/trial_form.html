@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}Update Trial{% else %}Create Trial{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>{% if form.instance.pk %}Update Trial{% else %}Create Trial{% endif %}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name == 'is_active' %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-toggle-on"></i>
+                                    </span>
+                                </div>
+                                <div class="form-control d-flex align-items-center justify-content-start">
+                                    <label class="form-check-label mr-2 text-dark" for="{{ field.id_for_label }}">
+                                        {{ field.label }}
+                                    </label>
+                                    {{ field }}
+                                </div>
+                                {% if field.errors %}
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        {% if field.name == 'end_date' %}<i class="far fa-calendar-alt"></i>
+                                        {% else %}<i class="fas fa-info-circle"></i>{% endif %}
+                                    </span>
+                                </div>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="form-group">
+                        <input type="submit" value="{% if form.instance.pk %}Update Trial{% else %}Create Trial{% endif %}" class="btn float-right login_btn">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    <a href="{% url 'trial_list' %}">Back to Trial List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

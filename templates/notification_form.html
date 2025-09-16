@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notification Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{% if action == 'Create' %}Send New{% else %}Add{% endif %} Notification</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <select id="user" name="user" class="form-control" aria-label="User" required>
+                        <option value="">Select User</option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}"
+                                {% if form.user.value|stringformat:"s" == user.id|stringformat:"s" %}selected{% endif %}>
+                                {{ user.get_full_name|default:user.username }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="text-white">Message:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-bell"></i></span>
+                        </div>
+                        <textarea class="form-control" id="message" name="message" rows="4" aria-label="Message" required>{{ form.message.value }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check d-flex align-items-center">
+                        <input type="checkbox" id="is_read" name="is_read" class="form-check-input mr-2"
+                            aria-label="Is Read" {% if form.is_read.value %}checked{% endif %}>
+                        <label class="form-check-label text-white" for="is_read">Is read</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {% if action == 'Create' %}Send{% else %}Submit{% endif %} Notification
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'notifications_list' %}">Back to Notifications</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

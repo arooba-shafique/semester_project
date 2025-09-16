@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .table-dark {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+
+        .btn-sm {
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .create-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .create-link a {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .create-link a:hover {
+            background-color: #218838;
+        }
+
+        .heading-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="mb-4 heading-center">Feedback List</h2>
+
+    {% if feedbacks %}
+    <div class="table-responsive">
+        <table class="table table-dark table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Store</th>
+                    <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.user.get_full_name|default:feedback.user.username }}</td>
+                    <td>{{ feedback.store.name }}</td>
+                    <td>{{ feedback.message }}</td>
+                    <td>
+                        <a href="{% url 'feedback_update' feedback.id %}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a href="{% url 'feedback_delete' feedback.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-muted text-center">No feedbacks available.</p>
+    {% endif %}
+
+    <div class="create-link">
+        <a href="{% url 'feedback_create' %}">
+            <i class="fas fa-plus"></i> Create New Feedback
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

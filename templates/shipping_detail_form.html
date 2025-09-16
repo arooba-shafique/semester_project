@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ action|default:"Add" }} Shipping Detail{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ action|default:"Add" }} Shipping Detail</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Order Dropdown -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-receipt"></i></span>
+                    </div>
+                    <select id="order" name="order" class="form-control" required>
+                        <option value="" disabled {% if not shipping_detail.order %}selected{% endif %}>Select Order</option>
+                        {% for order in orders %}
+                            <option value="{{ order.id }}"
+                                {% if shipping_detail.order.id == order.id %}selected{% endif %}>
+                                Order #{{ order.id }} - {{ order.user.username }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Shipping Method Dropdown -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-truck"></i></span>
+                    </div>
+                    <select id="method" name="method" class="form-control" required>
+                        <option value="" disabled {% if not shipping_detail.method %}selected{% endif %}>Select Shipping Method</option>
+                        {% for method in shipping_methods %}
+                            <option value="{{ method.id }}"
+                                {% if shipping_detail.method.id == method.id %}selected{% endif %}>
+                                {{ method.name }} ({{ method.price }} USD)
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Tracking Number -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                    </div>
+                    <input type="text" id="tracking_number" name="tracking_number" class="form-control"
+                           placeholder="Tracking Number" value="{{ shipping_detail.tracking_number|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {{ action|default:"Add" }} Shipping Detail
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'shipping_detail_list' %}">Back to Shipping Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

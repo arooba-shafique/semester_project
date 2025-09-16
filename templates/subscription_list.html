@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscription Records</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #ffffff;
+      font-size: 28px;
+    }
+
+    table {
+      width: 90%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-size: 16px;
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      color: #eaeaea;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2a2a2a;
+      color: #f8f8f8;
+    }
+
+    tr:nth-child(even) {
+      background-color: #1a1a1a;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #222;
+    }
+
+    tr:hover {
+      background-color: #333;
+    }
+
+    .actions a,
+    .actions button {
+      margin-right: 5px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      border: none;
+      border-radius: 3px;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .add-btn {
+      display: block;
+      width: 220px;
+      margin: 20px auto;
+      padding: 10px 14px;
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .add-btn:hover {
+      background-color: #218838;
+    }
+
+    form {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Subscription Records</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Plan</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Is Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for subscription in subscriptions %}
+      <tr>
+        <td>{{ subscription.id }}</td>
+        <td>{{ subscription.user }}</td>
+        <td>{{ subscription.plan }}</td>
+        <td>{{ subscription.start_date }}</td>
+        <td>{{ subscription.end_date }}</td>
+        <td>{{ subscription.is_active }}</td>
+        <td class="actions">
+          <a href="{% url 'subscription_update' subscription.pk %}" class="edit-btn">Edit</a>
+          <form method="post" action="{% url 'subscription_delete' subscription.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this subscription?');">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7" style="text-align:center;">No subscriptions found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'subscription_create' %}" class="add-btn">+ Create New Subscription</a>
+
+</body>
+</html>

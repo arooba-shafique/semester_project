@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{% if action == 'Create' %}Create{% else %}Edit{% endif %} User{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>{% if action == 'Create' %}Create User{% else %}Edit User{% endif %}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name == 'passkey_enabled' %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-key"></i>
+                                    </span>
+                                </div>
+                                <div class="form-control d-flex align-items-center justify-content-start">
+                                    <label class="form-check-label mr-2 text-dark" for="{{ field.id_for_label }}">
+                                        {{ field.label }}
+                                    </label>
+                                    {{ field }}
+                                </div>
+                                {% if field.errors %}
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% elif field.name == 'login_method' %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                    </span>
+                                </div>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        {% if field.name == 'username' %}<i class="fas fa-user"></i>
+                                        {% elif field.name == 'first_name' %}<i class="fas fa-signature"></i>
+                                        {% elif field.name == 'last_name' %}<i class="fas fa-signature"></i>
+                                        {% elif field.name == 'email' %}<i class="fas fa-envelope"></i>
+                                        {% else %}<i class="fas fa-info-circle"></i>{% endif %}
+                                    </span>
+                                </div>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="form-group">
+                        <input type="submit" value="{% if action == 'Create' %}Create{% else %}Update{% endif %} User" class="btn float-right login_btn">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    <a href="{% url 'user_list' %}">Back to User List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

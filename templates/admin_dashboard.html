@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopify Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+  :root {
+    --bg-dark: #111827;
+    --sidebar-dark: #1f2937;
+    --highlight: #4ade80;
+    --highlight-hover: #22c55e;
+    --text-light: #f9fafb;
+    --text-muted: #9ca3af;
+
+    /* New specific colors for header/logout for more control if needed */
+    --accent-green-start: #34d399; /* A slightly warmer green */
+    --accent-green-end: #10b981;   /* A deeper green */
+    --logout-red: #ef4444; /* A vibrant, yet not aggressive red */
+    --logout-red-hover: #dc2626; /* Darker red on hover */
+    --logout-red-active: #b91c1c; /* Even darker on active */
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+  }
+
+  .sidebar {
+    width: 280px;
+    background-color: var(--sidebar-dark);
+    height: 100vh;
+    overflow-y: auto;
+    padding: 100px 20px 30px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 280px;
+    background-color: var(--sidebar-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+  }
+
+  .header h1 {
+    font-size: 24px; /* Slightly larger for prominence */
+    font-weight: 700; /* Bolder */
+    /* Applied a subtle gradient for "Admin Panel" */
+    background: linear-gradient(to right, var(--accent-green-start), var(--accent-green-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback for browsers that don't support text fill color */
+    text-shadow: 0 0 5px rgba(52, 211, 153, 0.4); /* Soft glow */
+    margin: 0;
+  }
+
+  .logout-btn {
+  font-size: 14px; /* Original size, or keep 15px if preferred */
+  padding: 8px 14px; /* Original padding, or keep 10px 18px */
+  background-color: var(--highlight); /* Changed to use highlight color */
+  color: var(--bg-dark); /* Changed text color for better contrast on green */
+  text-decoration: none;
+  border-radius: 6px; /* Original border radius */
+  font-weight: bold; /* Original font weight */
+  transition: background 0.2s; /* Simpler transition */
+  cursor: pointer;
+  border: none;
+  display: inline-flex; /* Keep original display */
+  align-items: center;
+  justify-content: center;
+  box-shadow: none; /* Remove custom box-shadow if you want it flatter like the original */
+}
+
+.logout-btn:hover {
+  background-color: var(--highlight-hover); /* Darker green on hover */
+  transform: none; /* Remove transform if you want a flatter button */
+  box-shadow: none; /* Remove custom box-shadow on hover */
+  filter: none; /* Remove filter */
+}
+
+.logout-btn:active {
+  background-color: var(--highlight); /* Back to base highlight on active */
+  transform: none; /* Remove transform */
+  box-shadow: none; /* Remove custom box-shadow */
+  filter: none; /* Remove filter */
+}
+
+  /* ... (rest of your CSS) ... */
+
+  .section-title {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding-left: 10px;
+    margin: 0 0 10px 0;
+  }
+
+  .sidebar ul li {
+    margin-bottom: 8px;
+  }
+
+  .sidebar ul li a {
+    font-size: 16px;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.15s ease;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #374151;
+    transform: translateX(2px);
+  }
+
+  .main-frame {
+    flex-grow: 1;
+    height: 100vh;
+    border: none;
+  }
+
+  .login-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--highlight);
+    color: var(--bg-dark);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    z-index: 2000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.5s ease;
+  }
+</style>
+
+</head>
+<body>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="login-message" id="loginMessage">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="sidebar">
+    <div class="header">
+      <h1>Admin Panel</h1>
+      <a class="logout-btn" id="logoutButton" href="#">Logout</a>
+    </div>
+
+    <div class="section-title">User</div>
+    <ul>
+      <li><a href="{% url 'user_create' %}" target="main-frame">Add User</a></li>
+      <li><a href="{% url 'user_list' %}" target="main-frame">View Users</a></li>
+    </ul>
+
+    <div class="section-title">Trial</div>
+    <ul>
+      <li><a href="{% url 'trial_form' %}" target="main-frame">Add Trial</a></li>
+      <li><a href="{% url 'trial_list' %}" target="main-frame">View Trials</a></li>
+    </ul>
+
+    <div class="section-title">Plan</div>
+    <ul>
+      <li><a href="{% url 'plan_create' %}" target="main-frame">Add Plan</a></li>
+      <li><a href="{% url 'plan_list' %}" target="main-frame">View Plans</a></li>
+    </ul>
+
+    <div class="section-title">Subscription</div>
+    <ul>
+      <li><a href="{% url 'subscription_create' %}" target="main-frame">Add Subscription</a></li>
+      <li><a href="{% url 'subscription_list' %}" target="main-frame">View Subscriptions</a></li>
+    </ul>
+
+    <div class="section-title">Payment</div>
+    <ul>
+      <li><a href="{% url 'payment_create' %}" target="main-frame">Add Payment</a></li>
+      <li><a href="{% url 'payment_list' %}" target="main-frame">View Payments</a></li>
+    </ul>
+
+    <div class="section-title">Store</div>
+    <ul>
+      <li><a href="{% url 'store_create' %}" target="main-frame">Add Store</a></li>
+      <li><a href="{% url 'store_list' %}" target="main-frame">View Stores</a></li>
+    </ul>
+
+    <div class="section-title">Theme</div>
+    <ul>
+      <li><a href="{% url 'theme_create' %}" target="main-frame">Add Theme</a></li>
+      <li><a href="{% url 'theme_list' %}" target="main-frame">View Themes</a></li>
+    </ul>
+
+    <div class="section-title">Store Theme</div>
+    <ul>
+      <li><a href="{% url 'store_theme_create' %}" target="main-frame">Add Store Theme</a></li>
+      <li><a href="{% url 'store_theme_list' %}" target="main-frame">View Store Themes</a></li>
+    </ul>
+
+    <div class="section-title">Product</div>
+    <ul>
+      <li><a href="{% url 'product_form' %}" target="main-frame">Add Product</a></li>
+      <li><a href="{% url 'product_list' %}" target="main-frame">View Products</a></li>
+    </ul>
+
+    <div class="section-title">Inventory</div>
+    <ul>
+      <li><a href="{% url 'inventory_create' %}" target="main-frame">Add Inventory</a></li>
+      <li><a href="{% url 'inventory_list' %}" target="main-frame">View Inventory</a></li>
+    </ul>
+
+    <div class="section-title">Order</div>
+    <ul>
+      <li><a href="{% url 'order_form' %}" target="main-frame">Add Order</a></li>
+      <li><a href="{% url 'order_list' %}" target="main-frame">View Orders</a></li>
+    </ul>
+
+    <div class="section-title">Shipping Method</div>
+    <ul>
+      <li><a href="{% url 'shipping_method_create' %}" target="main-frame">Add Method</a></li>
+      <li><a href="{% url 'shipping_method_list' %}" target="main-frame">View Methods</a></li>
+    </ul>
+
+    <div class="section-title">Shipping Detail</div>
+    <ul>
+      <li><a href="{% url 'shipping_detail_create' %}" target="main-frame">Add Detail</a></li>
+      <li><a href="{% url 'shipping_detail_list' %}" target="main-frame">View Details</a></li>
+    </ul>
+
+    <div class="section-title">Customer</div>
+    <ul>
+      <li><a href="{% url 'customer_form' %}" target="main-frame">Add Customer</a></li>
+      <li><a href="{% url 'customer_list' %}" target="main-frame">View Customers</a></li>
+    </ul>
+
+    <div class="section-title">Email Campaign</div>
+    <ul>
+      <li><a href="{% url 'email_campaign_form' %}" target="main-frame">Add Campaign</a></li>
+      <li><a href="{% url 'email_campaign_list' %}" target="main-frame">View Campaigns</a></li>
+    </ul>
+
+    <div class="section-title">Refund Policy</div>
+    <ul>
+      <li><a href="{% url 'refund_policy_create' %}" target="main-frame">Add Policy</a></li>
+      <li><a href="{% url 'refund_policy_list' %}" target="main-frame">View Policies</a></li>
+    </ul>
+
+    <div class="section-title">Notification</div>
+    <ul>
+      <li><a href="{% url 'notification_create' %}" target="main-frame">Add Notification</a></li>
+      <li><a href="{% url 'notifications_list' %}" target="main-frame">View Notifications</a></li>
+    </ul>
+
+    <div class="section-title">Audit Log</div>
+    <ul>
+      <li><a href="{% url 'audit_log_create' %}" target="main-frame">Add Log</a></li>
+      <li><a href="{% url 'audit_log_list' %}" target="main-frame">View Logs</a></li>
+    </ul>
+
+    <div class="section-title">Feedback</div>
+    <ul>
+      <li><a href="{% url 'feedback_create' %}" target="main-frame">Add Feedback</a></li>
+      <li><a href="{% url 'feedback_list' %}" target="main-frame">View Feedbacks</a></li>
+    </ul>
+
+    <div class="section-title">Help Article</div>
+    <ul>
+      <li><a href="{% url 'help_article_create' %}" target="main-frame">Add Article</a></li>
+      <li><a href="{% url 'help_article_list' %}" target="main-frame">View Articles</a></li>
+    </ul>
+
+    <div class="section-title">Legal Document</div>
+    <ul>
+      <li><a href="{% url 'legal_document_create' %}" target="main-frame">Add Document</a></li>
+      <li><a href="{% url 'legal_document_list' %}" target="main-frame">View Documents</a></li>
+    </ul>
+
+    <div class="section-title">Tax Rule</div>
+    <ul>
+      <li><a href="{% url 'tax_rule_create' %}" target="main-frame">Add Rule</a></li>
+      <li><a href="{% url 'tax_rule_list' %}" target="main-frame">View Rules</a></li>
+    </ul>
+
+    <div class="section-title">Tax Transaction</div>
+    <ul>
+      <li><a href="{% url 'tax_transaction_create' %}" target="main-frame">Add Transaction</a></li>
+      <li><a href="{% url 'tax_transaction_list' %}" target="main-frame">View Transactions</a></li>
+    </ul>
+  </div>
+
+  <iframe name="main-frame" class="main-frame" src="{% url 'dashboard_home' %}"></iframe>
+
+  <script>
+  // Show logout confirmation on button click
+  document.addEventListener('DOMContentLoaded', function () {
+    const logoutButton = document.getElementById('logoutButton');
+
+    if (logoutButton) {
+      logoutButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isConfirmed = confirm('Are you sure you want to logout?');
+        if (isConfirmed) {
+          window.location.href = "{% url 'logout' %}";
+        }
+      });
+    }
+
+    // Push an initial dummy state into the history to trap back
+    history.pushState(null, '', location.href);
+
+    // Trap the browser back button
+    window.addEventListener('popstate', function () {
+      const isConfirmed = confirm('Are you sure you want to logout?');
+      if (isConfirmed) {
+        window.location.href = "{% url 'logout' %}";
+      } else {
+        // Prevent going back by pushing a new state
+        history.pushState(null, '', location.href);
+      }
+    });
+  });
+
+  // Optional: fade out login message
+  setTimeout(() => {
+    const msg = document.getElementById('loginMessage');
+    if (msg) {
+      msg.style.opacity = '0';
+      setTimeout(() => msg.remove(), 500);
+    }
+  }, 3000);
+</script>
+
+</body>
+</html>
+</body>
+</html>

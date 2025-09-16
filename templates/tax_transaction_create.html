@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tax Transaction Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{% if form.instance.pk %}Edit{% else %}Add New{% endif %} Tax Transaction</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Order Dropdown (manual) -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                    </div>
+                    <select id="order" name="order" class="form-control" aria-label="Order" required>
+    <option value="">Select Order</option>
+    {% for order in orders %}
+        <option value="{{ order.id }}" {% if selected_order_id == order.id %}selected{% endif %}>
+            {{ order }}
+        </option>
+    {% endfor %}
+</select>
+
+                </div>
+
+                <!-- Tax Amount (use form widget here to keep validation, errors, etc) -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                    </div>
+                    {{ form.tax_amount }}
+                </div>
+
+                <!-- Tax Rule Dropdown (manual) -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-receipt"></i></span>
+                    </div>
+                   
+
+<select id="tax_rule_applied" name="tax_rule_applied" class="form-control" aria-label="Tax Rule Applied">
+    <option value="">Select Tax Rule (Optional)</option>
+    {% for tax_rule in tax_rules %}
+        <option value="{{ tax_rule.id }}" {% if selected_tax_rule_id == tax_rule.id %}selected{% endif %}>
+            {{ tax_rule }}
+        </option>
+    {% endfor %}
+</select>
+
+
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {% if form.instance.pk %}Update{% else %}Save{% endif %} Tax Transaction
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'tax_transaction_list' %}">Back to Tax Transactions</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

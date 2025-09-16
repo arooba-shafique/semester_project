@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notification Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Notification Details</h1>
+
+    <!-- Display Notification Title -->
+    <h2>{{ notification.title }}</h2>
+
+    <!-- Display Notification Message -->
+    <p>{{ notification.message }}</p>
+
+    <!-- Display Timestamp or Date -->
+    <p><strong>Received on:</strong> {{ notification.timestamp }}</p>
+
+    <!-- Optionally add a link back to the notification list -->
+    <a href="{% url 'notifications-list' %}">Back to Notifications</a>
+
+</body>
+</html>

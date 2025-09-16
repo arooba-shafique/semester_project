@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Subscription{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+            <div class="card-header text-center" style="background: none; border-bottom: none;">
+                <h4 class="text-white mb-0 font-weight-bold">{{ action }} Subscription</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <!-- User Field -->
+                    <div class="form-group">
+                        <label class="text-light" for="id_user">Select User:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                            {{ form.user }}
+                        </div>
+                        {% if form.user.errors %}
+                            <small class="text-danger">{{ form.user.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Plan Field -->
+                    <div class="form-group">
+                        <label class="text-light" for="id_plan">Select Plan:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                    <i class="fas fa-box-open"></i>
+                                </span>
+                            </div>
+                            {{ form.plan }}
+                        </div>
+                        {% if form.plan.errors %}
+                            <small class="text-danger">{{ form.plan.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Start Date -->
+                    <div class="form-group">
+                        <label class="text-light" for="id_start_date">Start Date:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            {{ form.start_date }}
+                        </div>
+                        {% if form.start_date.errors %}
+                            <small class="text-danger">{{ form.start_date.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="form-group">
+                        <label class="text-light" for="id_end_date">End Date:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                    <i class="fas fa-calendar-times"></i>
+                                </span>
+                            </div>
+                            {{ form.end_date }}
+                        </div>
+                        {% if form.end_date.errors %}
+                            <small class="text-danger">{{ form.end_date.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-warning btn-block">{{ action }} Subscription</button>
+
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'subscription_list' %}" class="text-light">Back to Subscription List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

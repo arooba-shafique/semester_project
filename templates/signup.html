@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* Your existing CSS styles go here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .signup-box {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      width: 350px;
+    }
+
+    .signup-box h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #4CAF50;
+    }
+
+    .form-field {
+      margin-bottom: 1rem;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #cccccc;
+    }
+
+    .form-field input {
+      width: 100%;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: #fff;
+    }
+
+    .form-field input::placeholder {
+      color: #999;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.6rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+    /* Add styling for errors */
+    .errorlist {
+        color: red;
+        list-style-type: none;
+        padding: 0;
+        margin-top: 0.25rem;
+        font-size: 0.85rem;
+    }
+    .errorlist li {
+        margin-bottom: 0.25rem;
+    }
+    .field-error input {
+        border-color: red !important; /* Highlight fields with errors */
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>Sign Up</h2>
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+
+      {# Display non-field errors (e.g., "Passwords don't match") #}
+      {% if form.non_field_errors %}
+          <ul class="errorlist">
+              {% for error in form.non_field_errors %}
+                  <li>{{ error }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+
+      {# Iterate through each field in the form and render it #}
+      {% for field in form %}
+          <div class="form-field {% if field.errors %}field-error{% endif %}">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {# Display individual field errors #}
+              {% if field.errors %}
+                  <ul class="errorlist">
+                      {% for error in field.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+          </div>
+      {% endfor %}
+
+      <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </div>
+  </div>
+</body>
+</html>

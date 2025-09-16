@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html, body {
+    background-image: url('https://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.card-header h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.login_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.login_btn:hover {
+    color: black;
+    background-color: white;
+}
+
+.links {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.links a {
+    margin-left: 4px;
+    color: #FFC312;
+    text-decoration: none;
+}
+
+.links a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.card-footer {
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    text-align: center;
+}
+
+.errorlist {
+    color: #dc3545;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+}
+
+.errorlist li {
+    list-style: none;
+    padding-left: 0;
+}
+
+.input-group .form-control {
+    border-left: 0;
+}
+
+.input-group .input-group-prepend .input-group-text {
+    border-right: 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Checkbox Label Box */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-weight: 500;
+}

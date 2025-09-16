@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tax Rule Details</title>
+</head>
+<body>
+    <h1>Tax Rule Submitted</h1>
+
+    <p><strong>Store:</strong> {{ tax_rule.store.name }}</p>
+    <p><strong>Country:</strong> {{ tax_rule.country }}</p>
+    <p><strong>State:</strong> {{ tax_rule.state }}</p>
+    <p><strong>Tax Rate:</strong> {{ tax_rule.tax_rate }}</p>
+    <p><strong>Is Active:</strong> {{ tax_rule.is_active }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

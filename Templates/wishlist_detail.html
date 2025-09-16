@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist Detail</title>
+</head>
+<body>
+    <h1>Wishlist Entry Submitted</h1>
+
+    <p><strong>User:</strong> {{ wishlist.user }}</p>
+    <p><strong>Product:</strong> {{ wishlist.product }}</p>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

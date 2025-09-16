@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Promotion Detail</title>
+</head>
+<body>
+    <h1>Promotion Submitted</h1>
+
+    <p><strong>Code:</strong> {{ promotion.code }}</p>
+    <p><strong>Discount Percentage:</strong> {{ promotion.discount_percentage }}%</p>
+    <p><strong>Valid From:</strong> {{ promotion.valid_from }}</p>
+    <p><strong>Valid To:</strong> {{ promotion.valid_to }}</p>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

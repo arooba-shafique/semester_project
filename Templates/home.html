@@ -1,0 +1,283 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopify - Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background-color: #111;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      color: #81F900;
+      font-weight: bold;
+    }
+
+    .login-button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+    }
+
+    .hero p {
+      color: #bbb;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .hero .signup-btn {
+      margin-top: 1.5rem;
+      background-color: #81F900;
+      color: #000;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem;
+    }
+
+    .feature-card {
+      background-color: #111;
+      border: 1px solid #222;
+      width: 220px;
+      padding: 1.2rem;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .stats {
+      text-align: center;
+      margin: 2rem 1rem;
+    }
+
+    .stats h2 {
+      margin-bottom: 1rem;
+    }
+
+    .stat-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background-color: #111;
+      padding: 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .cta-section button {
+      background-color: #81F900;
+      color: #000;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+.menu-toggle {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+  display: block;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #111;
+  border: 1px solid #222;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.menu a {
+  color: #fff;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: #81F900;
+}
+
+.hidden {
+  display: none;
+
+  .login-after-cta {
+  margin-top: 1rem;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-after-cta:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+}
+
+
+  </style>
+</head>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('hidden');
+  }
+</script>
+
+<body>
+
+<header>
+  <div class="logo">shopify</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰ Menu </div>
+
+<nav class="menu hidden" id="menu">
+
+<a href="{% url 'create_user' %}">Sign Up</a>
+<a href="{% url 'dashboard' %}">Dashboard</a>
+<a href="{% url 'login' %}">Log In</a>
+<a href="{% url 'user_list' %}">Users</a>
+<a href="{% url 'product_list' %}">Products</a>
+<a href="{% url 'theme_list' %}">Themes</a>
+<a href="{% url 'store_list' %}">Available Stores</a>
+<a href="{% url 'home' %}">Go to Home</a>
+
+  </nav>
+</header>
+
+<section class="hero" id="home">
+
+
+<section class="hero" id="signup">
+
+
+  <h1>Be the next big thing</h1>
+  <p>Dream big, build fast, and grow far on Shopify</p>
+  <button class="signup-btn">Sign up Now</button>
+</section>
+
+<section class="features" id="quick">
+
+  <div class="feature-card">
+    <h3>Build an online store</h3>
+    <p>Create a beautiful, customizable online store with our easy-to-use tools.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Handle shipping & fulfillment</h3>
+    <p>Streamline your shipping and delivery process.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Manage finances & analytics</h3>
+    <p>Gain insights into your business performance with powerful analytics.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Sell on social & marketplaces</h3>
+    <p>Expand your reach by selling on more platforms.</p>
+  </div>
+</section>
+
+<section class="stats" id="stores">
+
+  <h2>Powering millions of businesses globally.</h2>
+  <p>From local shops to international brands, Shopify is the platform of choice for entrepreneurs worldwide.</p>
+  <div class="stat-boxes">
+    <div class="stat">170+<br>Countries supported</div>
+    <div class="stat">$600B+<br>Total sales processed</div>
+    <div class="stat">2M+<br>Businesses powered</div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to start your entrepreneurial journey?</h2>
+  <a href="{% url 'create_user' %}">
+    <button>Get Started</button>
+  </a> 
+
+  <br>
+  <a href="{% url 'login' %}">
+    <button class="login-after-cta">Log in</button>
+  </a>
+</section>
+
+
+<footer>
+  &copy; 2025 Shopify. All rights reserved.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subscription Details</title>
+</head>
+<body>
+    <h1>Subscription Details</h1>
+    
+    <p><strong>User:</strong> {{ subscription.user }}</p>
+    
+    <p><strong>Plan:</strong> {{ subscription.plan }}</p>
+    
+    <p><strong>Is active:</strong> {{ subscription.is_active }}</p>
+    
+    
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+    <p><a href="{% url 'create_subscription' %}">Create Another Subscription</a></p>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit Log Details</title>
+</head>
+<body>
+    <h1>Audit Log Submitted</h1>
+
+    <p><strong>User:</strong> {{ audit_log.user.username }}</p>
+    <p><strong>Action:</strong> {{ audit_log.action }}</p>
+    <p><strong>IP Address:</strong> {{ audit_log.ip_address }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Gift-Card{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Gift-Card List</h2>
+  <a href="{% url 'create_gift_card' %}" class="btn btn-success mb-3">Add Gift-Card</a>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Code</th>
+            <th>Amount</th>
+            <th>Issued to</th>
+            <th>Expiration date</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gift_card in gift_card %}
+        <tr>
+            <td>{{ gift_card.code }}</td>
+            <td>{{ gift_card.amount }}</td>
+            <td>{{ gift_card.issued_to }}</td>
+            <td>{{ gift_card.expiration_date }}</td>
+         <td class="text-center">
+          <a href="{% url 'update_gift_card' gift_card.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_gift_card' gift_card.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No gift cards found.</td></tr>
+          {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

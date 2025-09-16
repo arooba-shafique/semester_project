@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gift Card Detail</title>
+</head>
+<body>
+    <h1>Gift Card Submitted</h1>
+
+    <p><strong>Code:</strong> {{ gift_card.code }}</p>
+    <p><strong>Amount:</strong> {{ gift_card.amount }}</p>
+    <p><strong>Issued To:</strong> {{ gift_card.issued_to }}</p>
+    <p><strong>Expiration Date:</strong> {{ gift_card.expiration_date }}</p>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

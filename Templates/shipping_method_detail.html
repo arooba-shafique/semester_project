@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Method Details</title>
+</head>
+<body>
+    <h1>Shipping Method Submitted</h1>
+
+    <p><strong>Name:</strong> {{ shipping_method.name }}</p>
+    <p><strong>Price:</strong> {{ shipping_method.price }}</p>
+    <p><strong>Estimated days:</strong> {{ shipping_method.estimated_days }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

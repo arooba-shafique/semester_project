@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Customers</h2>
+  <a href="{% url 'create_payment' %}" class="btn btn-success mb-3">Add Customer</a>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr><th>User</th>
+        <th>Store</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+      <tr>
+        <td>{{ customer.user }}</td>
+        <td>{{ customer.store }}</td>
+        <td>{{ customer.phone}}</td>
+         <td>{{ customer.address}}</td>
+          <td class="text-center">
+          <a href="{% url 'update_customer' customer.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_customer' customer.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No customers found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help Article Details</title>
+</head>
+<body>
+    <h1>Help Article Submitted</h1>
+
+    <p><strong>Title:</strong> {{ help_article.title }}</p>
+    <p><strong>Content:</strong> {{ help_article.content }}</p>
+    <p><strong>Category:</strong> {{ help_article.category }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

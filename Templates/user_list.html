@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+{% block title %}Users{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Users</h2>
+
+  <!-- Optional: Add new user button -->
+  <a href="{% url 'create_user' %}" class="btn btn-success mb-3">Add User</a>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Username</th>
+        <th>Email address</th>
+       <th>Password</th>
+                <th>Login method</th>
+                <th>Passkey enabled</th>
+        <th>Actions</th> <!-- NEW -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+                <td>{{ user.login_method }}</td>
+                <td>{{ user.passkey_enabled }}</td>
+        
+        <td>
+          <a href="{% url 'update_user' user.pk %}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{% url 'delete_user' user.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No users found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

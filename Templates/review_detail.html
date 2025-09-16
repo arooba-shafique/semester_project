@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Detail</title>
+</head>
+<body>
+    <h1>Review Submitted</h1>
+
+    <p><strong>Product:</strong> {{ review.product }}</p>
+    <p><strong>User:</strong> {{ review.user }}</p>
+    <p><strong>Rating:</strong> {{ review.rating }}</p>
+    <p><strong>Comment:</strong> {{ review.comment }}</p>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

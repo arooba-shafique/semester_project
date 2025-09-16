@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Details</title>
+</head>
+<body>
+    <h1>Payment Details</h1>
+
+    <p><strong>User:</strong> {{ payment.user }}</p>
+    
+    <p><strong>Amount:</strong> {{ payment.amount }}</p>
+   
+    <p><strong>Method:</strong> {{ payment.method }}</p>
+    
+    <p><strong>Status:</strong> {{ payment.status }}</p>
+    
+    <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+    
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+    <p><a href="{% url 'create_payment' %}">Create Another Payment</a></p>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ title|default:"Register" }}</title></head>
+<body>
+    <h1>{{ title|default:"Register" }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

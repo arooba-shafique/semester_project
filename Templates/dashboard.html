@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Shopify Clone</title>
+    <link rel="stylesheet" href="{% static 'shopify/css/dashboard.css' %}">
+</head>
+<body>
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">Shopify Admin</div>
+
+        <nav>
+            <div class="section-title">Forms</div>
+            <ul>
+                <li><a href="{% url 'create_user' %}" class="sidebar-link">Create User</a></li>
+                <li><a href="{% url 'create_store' %}" class="sidebar-link">Create Store</a></li>
+                <li><a href="{% url 'create_trial' %}" class="sidebar-link">Start Trial</a></li>
+                <li><a href="{% url 'create_plan' %}" class="sidebar-link">Add Plan</a></li>
+                <li><a href="{% url 'create_subscription' %}" class="sidebar-link">Create Subscription</a></li>
+                <li><a href="{% url 'create_payment' %}" class="sidebar-link">Log Payment</a></li>
+                <li><a href="{% url 'create_theme' %}" class="sidebar-link">Add Theme</a></li>
+                <li><a href="{% url 'create_store_theme' %}" class="sidebar-link">Apply Store Theme</a></li>
+                <li><a href="{% url 'create_product' %}" class="sidebar-link">Add Product</a></li>
+                <li><a href="{% url 'create_inventory' %}" class="sidebar-link">Manage Inventory</a></li>
+                <li><a href="{% url 'create_order' %}" class="sidebar-link">Create Order</a></li>
+                <li><a href="{% url 'create_shipping_method' %}" class="sidebar-link">Add Shipping Method</a></li>
+                <li><a href="{% url 'create_shipping_detail' %}" class="sidebar-link">Add Shipping Detail</a></li>
+                <li><a href="{% url 'create_customer' %}" class="sidebar-link">Add Customer</a></li>
+                <li><a href="{% url 'create_email_campaign' %}" class="sidebar-link">Create Email Campaign</a></li>
+                <li><a href="{% url 'create_refund_policy' %}" class="sidebar-link">Add Refund Policy</a></li>
+                <li><a href="{% url 'create_notification' %}" class="sidebar-link">Create Notification</a></li>
+                <li><a href="{% url 'create_audit_log' %}" class="sidebar-link">Add Audit Log</a></li>
+                <li><a href="{% url 'create_feedback' %}" class="sidebar-link">Submit Feedback</a></li>
+                <li><a href="{% url 'create_help_article' %}" class="sidebar-link">Add Help Article</a></li>
+                <li><a href="{% url 'create_legal_document' %}" class="sidebar-link">Add Legal Document</a></li>
+                <li><a href="{% url 'create_tax_rule' %}" class="sidebar-link">Add Tax Rule</a></li>
+                <li><a href="{% url 'create_tax_transaction' %}" class="sidebar-link">Log Tax Transaction</a></li>
+                <li><a href="{% url 'create_review' %}" class="sidebar-link">Add Review</a></li>
+                <li><a href="{% url 'create_wishlist' %}" class="sidebar-link">Create Wishlist</a></li>
+                <li><a href="{% url 'create_promotion' %}" class="sidebar-link">Add Promotion</a></li>
+                <li><a href="{% url 'create_gift_card' %}" class="sidebar-link">Add Gift Card</a></li>
+                <li><a href="{% url 'create_terms_agreement' %}" class="sidebar-link">Add Terms Agreement</a></li>
+                <li><a href="{% url 'create_vendor' %}" class="sidebar-link">Add Vendor</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="card">
+            <h2>Welcome, {{ user.username }}!</h2>
+            <p>This is your admin dashboard. Use the sidebar to manage forms and store data.</p>
+        </div>
+    </main>
+
+</div>
+</body>
+</html>

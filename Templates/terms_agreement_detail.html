@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terms Agreement Details</title>
+</head>
+<body>
+    <h1>Terms Agreement Submitted</h1>
+
+    <p><strong>User:</strong> {{ terms_agreement.user.username }}</p>
+    <p><strong>Version:</strong> {{ terms_agreement.version }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

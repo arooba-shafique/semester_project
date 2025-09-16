@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Details</title>
+</head>
+<body>
+    <h1>Feedback Submitted</h1>
+
+    <p><strong>User:</strong> {{ feedback.user.username }}</p>
+    <p><strong>Store:</strong> {{ feedback.store.name }}</p>
+    <p><strong>Message:</strong> {{ feedback.message }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

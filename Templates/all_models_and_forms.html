@@ -1,0 +1,29 @@
+<h2>User Form</h2>
+<form method="POST" action="{% url 'user_create' %}">
+  {% csrf_token %}
+  {{ user_form.as_p }}
+  <button type="submit">Create User</button>
+</form>
+
+<h2>Trial Form</h2>
+<form method="POST" action="{% url 'trial_create' %}">
+  {% csrf_token %}
+  {{ trial_form.as_p }}
+  <button type="submit">Create Trial</button>
+</form>
+
+<!-- Repeat for other forms -->
+
+<hr>
+
+<h2>Users List</h2>
+<ul>
+  {% for user in users %}
+    <li>{{ user.username }} - {{ user.email }}</li>
+  {% empty %}
+    <li>No users found.</li>
+  {% endfor %}
+</ul>
+
+<!-- Repeat for other models -->
+

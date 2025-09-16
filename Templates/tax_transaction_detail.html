@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tax Transaction Details</title>
+</head>
+<body>
+    <h1>Tax Transaction Submitted</h1>
+
+    <p><strong>Order:</strong> {{ tax_transaction.order.id }}</p>
+    <p><strong>Tax Amount:</strong> {{ tax_transaction.tax_amount }}</p>
+    <p><strong>Tax Rule Applied:</strong> {{ tax_transaction.tax_rule_applied.id }}</p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

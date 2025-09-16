@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            width: 350px;
+        }
+        .login-box h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #4CAF50;
+            
+        }
+        .form-field {
+            margin-bottom: 1rem;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #cccccc;
+        }
+        .form-field input {
+            width: 100%;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+        }
+        .form-field input::placeholder {
+            color: #999;
+        }
+        .error {
+            color: #ff4c4c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .signup-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .message-box {
+            background-color: #2f855a;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .message-error {
+            background-color: #e53e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message-box {% if message.tags == 'error' %}message-error{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}" autocomplete="off">
+            {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input type="text" name="username" placeholder="Type your username" autocomplete="off" required>
+            </div>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Type your password" autocomplete="off" required>
+            </div>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

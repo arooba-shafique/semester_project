@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}All Forms{% endblock %}
+
+{% block content %}
+<h1>All Forms</h1>
+<ul>
+    <li><a href="{% url 'user_create' %}">User Form</a></li>
+    <li><a href="{% url 'trial_create' %}">Trial Form</a></li>
+    <li><a href="{% url 'plan_create' %}">Plan Form</a></li>
+    <li><a href="{% url 'subscription_create' %}">Subscription Form</a></li>
+    <li><a href="{% url 'payment_create' %}">Payment Form</a></li>
+    <li><a href="{% url 'store_create' %}">Store Form</a></li>
+    <li><a href="{% url 'theme_create' %}">Theme Form</a></li>
+    <li><a href="{% url 'store_theme_create' %}">Store Theme Form</a></li>
+    <li><a href="{% url 'product_form' %}">Product Form</a></li>
+    <li><a href="{% url 'inventory_create' %}">Inventory Form</a></li>
+    <li><a href="{% url 'order_create' %}">Order Form</a></li>
+    <li><a href="{% url 'shipping_method_create' %}">Shipping Method Form</a></li>
+    <li><a href="{% url 'shipping_detail_create' %}">Shipping Detail Form</a></li>
+    <li><a href="{% url 'customer_create' %}">Customer Form</a></li>
+    <li><a href="{% url 'email_campaign_create' %}">Email Campaign Form</a></li>
+    <li><a href="{% url 'refund_policy_create' %}">Refund Policy Form</a></li>
+    <li><a href="{% url 'notification_create' %}">Notification Form</a></li>
+    <li><a href="{% url 'audit_log_create' %}">Audit Log Form</a></li>
+    <li><a href="{% url 'feedback_create' %}">Feedback Form</a></li>
+    <li><a href="{% url 'help_article_create' %}">Help Article Form</a></li>
+    <li><a href="{% url 'legal_document_create' %}">Legal Document Form</a></li>
+    <li><a href="{% url 'tax_rule_create' %}">Tax Rule Form</a></li>
+    <li><a href="{% url 'tax_transaction_create' %}">Tax Transaction Form</a></li>
+</ul>
+{% endblock %}

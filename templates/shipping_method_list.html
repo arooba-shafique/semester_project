@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shipping Methods</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        tr:hover {
+            background-color: #3a3a3a;
+        }
+
+        .btn {
+            font-size: 0.9rem;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin: 2px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .add-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Shipping Methods</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Shipping Method</th>
+                <th>Price ($)</th>
+                <th>Estimated Delivery (Days)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for method in shipping_methods %}
+            <tr>
+                <td>{{ method.name }}</td>
+                <td>{{ method.price }}</td>
+                <td>{{ method.estimated_days }}</td>
+                <td>
+                    <a href="{% url 'shipping_method_update' method.pk %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'shipping_method_delete' method.pk %}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this shipping method?');">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No shipping methods found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="add-btn-container">
+        <a href="{% url 'shipping_method_create' %}" class="btn btn-success">
+            <i class="fas fa-plus"></i> Add Shipping Method
+        </a>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

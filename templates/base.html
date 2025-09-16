@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}My Website{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'shopify/css/style.css' %}">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Main Wrapper for vertical centering -->
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

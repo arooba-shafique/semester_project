@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer List</title>
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        tr:hover {
+            background-color: #3a3a3a;
+        }
+
+        .actions a {
+            margin-right: 6px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .add-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 14px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Customer List</h2>
+
+    {% if customers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Store</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.customer_name }}</td>
+                <td>{{ customer.store }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.address|truncatechars:50 }}</td>
+                <td class="actions">
+                    <a href="{% url 'customer_update' customer.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 'customer_delete' customer.id %}" class="delete-btn"
+                       onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No customers found.</p>
+    {% endif %}
+
+    <a href="{% url 'customer_form' %}" class="add-btn">+ Add New Customer</a>
+
+</body>
+</html>

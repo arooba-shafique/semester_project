@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ action }} Theme
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+            <div class="card-header text-center" style="background: none; border-bottom: none;">
+                <h4 class="text-white mb-0 font-weight-bold">
+                    {{ action }} Theme
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="text-light" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #FFC107; color: #212529;">
+                                        {% if field.name == 'name' %}
+                                            <i class="fas fa-palette"></i>
+                                        {% elif field.name == 'file' %}
+                                            <i class="fas fa-file-archive"></i>
+                                        {% else %}
+                                            <i class="fas fa-info-circle"></i>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                {{ field }}
+                            </div>
+                            {% if field.errors %}
+                                <div class="errorlist text-danger">{{ field.errors }}</div>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-warning btn-block">
+                        {{ action }} Theme
+                    </button>
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'theme_list' %}" class="text-light">Back to Theme List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .add-product {
+            display: block;
+            text-align: center;
+            margin: 40px auto 0 auto;
+            padding: 10px 18px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            width: fit-content;
+        }
+
+        .add-product:hover {
+            background-color: #218838;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            width: 300px;
+            padding: 15px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease;
+            /* Improved Styling */
+            min-height: 420px; /* Adjust as needed for your content */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes action links to bottom */
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+
+        .product-card img {
+            width: 100%;
+            /* Consistent image height */
+            height: 180px; /* You can adjust this value */
+            object-fit: cover; /* Covers the area, cropping if necessary */
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #222;
+        }
+
+        .product-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #4caf50;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .product-description-line {
+            font-size: 14px;
+            color: #ccc;
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            /* Allow description to take up available space */
+            flex-grow: 1;
+        }
+
+        .product-description-label {
+            font-weight: bold;
+            color: #eee;
+        }
+
+        .product-detail {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .action-links {
+            margin-top: auto; /* Pushes action links to the bottom */
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 10px; /* Add some padding above the links */
+        }
+
+        .action-links a {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .action-links a:first-child {
+            background-color: #007bff;
+        }
+
+        .action-links a:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        .action-links a:last-child {
+            background-color: #dc3545;
+        }
+
+        .action-links a:last-child:hover {
+            background-color: #c82333;
+        }
+
+        .no-products {
+            font-style: italic;
+            color: #aaa;
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Products</h1>
+
+    <div class="product-container">
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x180/2e2e2e/cccccc?text=No+Image" alt="No Image">
+                {% endif %}
+
+                <div class="product-title">{{ product.name }}</div>
+                <div class="product-price">${{ product.price }}</div>
+
+                <div class="product-description-line">
+                    <div class="product-description-label">Description:</div>
+                    <div>{{ product.description|linebreaksbr }}</div>
+                </div>
+
+                <div class="product-detail"><strong>Store:</strong> {{ product.store.name }}</div>
+                <div class="product-detail"><strong>Published:</strong> {{ product.is_published|yesno:"Yes,No" }}</div>
+
+                <div class="action-links">
+                    <a href="{% url 'product_update' product.pk %}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'product_delete' product.pk %}" onclick="return confirm('Are you sure?');">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-products">No products found.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'product_form' %}" class="add-product">
+        <i class="fas fa-plus"></i> Add New Product
+    </a>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!-- shopify/templates/shopify/payment_success.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Payment Successful</h1>
+        <p>Thank you! Your payment has been processed successfully.</p>
+        <a href="{% url 'home' %}" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

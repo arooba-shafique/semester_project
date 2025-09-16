@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Shipping Method{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ action|default:"Add" }} Shipping Method</h3>
+
+        </div>
+        <div class="card-body">
+            <form method="post">
+    {% csrf_token %}
+
+    <div class="input-group form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-truck"></i></span>
+        </div>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Shipping Method Name" aria-label="Shipping Method Name" required value="{{ shipping_method.name|default:'' }}">
+    </div>
+
+    <div class="input-group form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+        </div>
+        <input type="number" id="price" name="price" class="form-control" placeholder="Shipping Price" aria-label="Shipping Price" step="0.01" required value="{{ shipping_method.price|default:'' }}">
+    </div>
+
+    <div class="input-group form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-clock"></i></span>
+        </div>
+        <input type="number" id="estimated_days" name="estimated_days" class="form-control" placeholder="Estimated Delivery Days" aria-label="Estimated Delivery Days" required value="{{ shipping_method.estimated_days|default:'' }}">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn float-right login_btn">{{ action|default:"Add" }} Shipping Method</button>
+    </div>
+
+</form>
+
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'shipping_method_list' %}">Back to Shipping Methods</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

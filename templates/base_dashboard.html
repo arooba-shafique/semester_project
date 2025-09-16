@@ -1,0 +1,28 @@
+<!-- templates/base_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <div class="flex">
+    <!-- Sidebar fixed to the left -->
+    <div class="w-64 bg-white border-r shadow-lg h-screen fixed">
+      {% block sidebar %}
+        {% include "sidebar.html" %}
+      {% endblock %}
+    </div>
+
+    <!-- Main content shifted right -->
+    <div class="ml-64 w-full p-8">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+
+</body>
+</html>

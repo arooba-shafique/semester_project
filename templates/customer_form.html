@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{% if action == 'Create' %}Add New{% else %}Edit{% endif %} Customer</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Customer Name (manual text input) -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="Customer Name"
+                           value="{{ form.customer_name.value|default_if_none:'' }}" required>
+                </div>
+
+                <!-- Store Dropdown -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-store"></i></span>
+                    </div>
+                    <select id="store" name="store" class="form-control" required>
+                        <option value="" disabled {% if not form.store.value %}selected{% endif %}>Select Store</option>
+                        {% for store in stores %}
+                            <option value="{{ store.id }}"
+                                {% if store.id|stringformat:'s' == form.store.value|stringformat:'s' %}selected{% endif %}>
+                                {{ store.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Phone -->
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Phone Number"
+                           value="{{ form.phone.value|default_if_none:'' }}">
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address" class="text-white">Address:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+                        <textarea class="form-control" id="address" name="address" rows="3">{{ form.address.value|default_if_none:'' }}</textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">
+                        {% if action == 'Create' %}Save{% else %}Update{% endif %} Customer Info
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'customer_list' %}">Back to Customer List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

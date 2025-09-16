@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Audit Log Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>{% if action == 'Create' %}Add {% else %}Edit{% endif %} Audit Log</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <select id="user" name="user" class="form-control" aria-label="User" required>
+    <option value="">Select User</option>
+    {% for user in users %}
+        <option value="{{ user.id }}"
+            {% if form.instance.user and form.instance.user.id == user.id %}selected{% endif %}>
+            {{ user.first_name }} {{ user.last_name|default:"" }}
+        </option>
+    {% endfor %}
+</select>
+
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-clipboard-list"></i></span>
+                    </div>
+                    <input type="text" id="action" name="action" class="form-control" placeholder="Action" aria-label="Action" 
+                        value="{{ form.instance.action|default_if_none:'' }}" required>
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                    </div>
+                    <input type="text" id="ip_address" name="ip_address" class="form-control" placeholder="IP Address" aria-label="IP Address" 
+                        value="{{ form.instance.ip_address|default_if_none:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">{{ action }}</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'audit_log_list' %}">Back to Audit Log</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

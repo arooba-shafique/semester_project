@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Email Campaign Form{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center h-100">
+    <div class="card">
+        <div class="card-header">
+            <h3>Create Email Campaign</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-store"></i></span>
+                    </div>
+                    <select id="store" name="store" class="form-control" aria-label="Store" required>
+                        <option value="">Select Store</option>
+                        {# Store options will be dynamically loaded by Django #}
+                        <option value="store1">Store A</option>
+                        <option value="store2">Store B</option>
+                    </select>
+                </div>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
+                    </div>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" aria-label="Subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="text-white">Content:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <textarea class="form-control" id="content" name="content" rows="5" aria-label="Content"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn float-right login_btn">Send Campaign</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                <a href="{% url 'emailcampaign_list' %}">Back to Email Campaigns</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

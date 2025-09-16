@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>All Forms</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Numans&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Numans', sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+    }
+
+    h1 {
+        margin: 40px 0 20px 0;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-align: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        width: 90%;
+        max-width: 1000px;
+        margin-bottom: 60px;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        user-select: none;
+    }
+
+    .card:hover, .card:focus {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-6px);
+        outline: none;
+    }
+
+    .card h2 {
+        font-size: 1.25rem;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 480px) {
+        .grid-container {
+            grid-template-columns: 1fr;
+            width: 95%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>All Forms</h1>
+
+<div class="grid-container">
+    <a href="{% url 'user_create' %}" class="card" tabindex="0"><h2>User Form</h2></a>
+    <a href="{% url 'trial_form' %}" class="card" tabindex="0"><h2>Trial Form</h2></a>
+    <a href="{% url 'plan_create' %}" class="card" tabindex="0"><h2>Plan Form</h2></a>
+    <a href="{% url 'subscription_create' %}" class="card" tabindex="0"><h2>Subscription Form</h2></a>
+    <a href="{% url 'payment_create' %}" class="card" tabindex="0"><h2>Payment Form</h2></a>
+    <a href="{% url 'store_create' %}" class="card" tabindex="0"><h2>Store Form</h2></a>
+    <a href="{% url 'theme_create' %}" class="card" tabindex="0"><h2>Theme Form</h2></a>
+    <a href="{% url 'store_theme_create' %}" class="card" tabindex="0"><h2>Store Theme Form</h2></a>
+    <a href="{% url 'product_form' %}" class="card" tabindex="0"><h2>Product Form</h2></a>
+    <a href="{% url 'inventory_create' %}" class="card" tabindex="0"><h2>Inventory Form</h2></a>
+    <a href="{% url 'order_form' %}" class="card" tabindex="0"><h2>Order Form</h2></a>
+    <a href="{% url 'shipping_method_create' %}" class="card" tabindex="0"><h2>Shipping Method Form</h2></a>
+    <a href="{% url 'shipping_detail_create' %}" class="card" tabindex="0"><h2>Shipping Detail Form</h2></a>
+    <a href="{% url 'customer_form' %}" class="card" tabindex="0"><h2>Customer Form</h2></a>
+    <a href="{% url 'email_campaign_form' %}" class="card" tabindex="0"><h2>Email Campaign Form</h2></a>
+    <a href="{% url 'refund_policy_create' %}" class="card" tabindex="0"><h2>Refund Policy Form</h2></a>
+    <a href="{% url 'notification_create' %}" class="card" tabindex="0"><h2>Notification Form</h2></a>
+    <a href="{% url 'audit_log_create' %}" class="card" tabindex="0"><h2>Audit Log Form</h2></a>
+    <a href="{% url 'feedback_create' %}" class="card" tabindex="0"><h2>Feedback Form</h2></a>
+    <a href="{% url 'help_article_create' %}" class="card" tabindex="0"><h2>Help Article Form</h2></a>
+    <a href="{% url 'legal_document_create' %}" class="card" tabindex="0"><h2>Legal Document Form</h2></a>
+    <a href="{% url 'tax_rule_create' %}" class="card" tabindex="0"><h2>Tax Rule Form</h2></a>
+    <a href="{% url 'tax_transaction_create' %}" class="card" tabindex="0"><h2>Tax Transaction Form</h2></a>
+</div>
+
+</body>
+</html>
